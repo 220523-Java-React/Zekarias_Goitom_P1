@@ -1,2 +1,17 @@
-package com.revature.service;public class CarService {
+package com.revature.service;
+
+public class CarService {
+    public void carRegistrationService(){
+
+    }
+    public void carBidService(){
+
+    }
+    public void carViewService(){
+
+    }
+    public void carRemovalService(){
+
+    }
+
 }

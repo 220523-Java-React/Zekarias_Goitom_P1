@@ -1,2 +1,5 @@
-package com.revature.model;public class Offer {
+package com.revature.model;
+
+public class Offer {
+
 }
