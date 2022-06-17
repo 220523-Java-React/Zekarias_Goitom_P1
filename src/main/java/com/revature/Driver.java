@@ -1,21 +1,48 @@
 package com.revature;
 
+//revature packages
 import com.revature.controller.CarController;
-import com.revature.model.Customer;
+import com.revature.controller.UserController;
+import com.revature.model.User;
+import com.revature.model.Car;
+
+//revature package for Database connection
+import com.revature.util.ConnectionUtility;
+
+//Gradle dependency libraries
 import io.javalin.Javalin;
 import io.javalin.http.HandlerType;
-
 import org.eclipse.jetty.http.HttpMethod;
 
+//java based libraries
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.function.Predicate;
+
+
 /* the driver class will be the engine of the app/web server
 it's from here that we will be running the app/web server
 it's where the main method is located
  */
 public class Driver {
 
+    //the entry point of our class begins at the main method. it's the engine for this whole app
     public static void main(String[] args) {
+        List<String> list = new ArrayList<>();
+        List<Integer> intList = new ArrayList<>();
+
+        int x = 1;
+        Integer wrapInt = x; // autoboxing Integer so that we can use the methods of the Integer class/object
+
+        intList.add(x);
+        int y = intList.get(0); // unboxing the
+
+
+        //creates an instance of the UserController class. This will allow us to access it behaviors and states here in this class
+        UserController userController = new UserController();
+
+
         //initializes an object named carcontroller which will be an instance of the CarController class
         CarController carcontroller = new CarController();
     //.create() is a method that acts as a constructor to initialize the app object of the Javalin class//
@@ -34,6 +61,9 @@ public class Driver {
         //context is a lambda function(method) which allows us to create in-line implementation of an interface
         app.get("/", context-> context.result("Welcome to Java's Dealership"));
         app.get("/carservices", carcontroller.carViewServices);
+
+        app.get("/users", userController.getAllUsers);
+        app.post("/users", userController.createNewUser);
 
 
 
