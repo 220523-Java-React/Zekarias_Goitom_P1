@@ -44,7 +44,7 @@ public class Driver {
 
 
         //initializes an object named carcontroller which will be an instance of the CarController class
-        CarController carcontroller = new CarController();
+        CarController carController = new CarController();
     //.create() is a method that acts as a constructor to initialize the app object of the Javalin class//
         Javalin app = Javalin.create();
         //start is a Javalin method that starts the app, which is basically the web server (I think)
@@ -60,10 +60,11 @@ public class Driver {
         //in the 2nd parameter we use the context method to print out a string which is the data get will retrieve
         //context is a lambda function(method) which allows us to create in-line implementation of an interface
         app.get("/", context-> context.result("Welcome to Java's Dealership"));
-        app.get("/carservices", carcontroller.carViewServices);
+        app.get("/cars", carController.getAllCars);
+        app.post("/cars", carController.createNewCar);
 
         app.get("/users", userController.getAllUsers);
-        app.post("/users", userController.createNewUser);
+        app.post("/users", userController.createUser);
 
 
 

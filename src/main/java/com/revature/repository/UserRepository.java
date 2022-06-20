@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepository implements DAO<User>{
-
+    @Override
     public User create(User user) {
         String sql = "insert into users(first_name, last_name, username, password) values(?, ?, ?, ?)";
 
@@ -49,7 +49,7 @@ public class UserRepository implements DAO<User>{
                 user.setFName(results.getString("first_name"));
                 user.setLName(results.getString("last_name"));
                 user.setUsername(results.getString("username"));
-                user.setPassword((results.getString("passowrd")));
+                user.setPassword((results.getString("password")));
                 user.setId(results.getInt("id"));
 
                 users.add(user);
@@ -62,8 +62,9 @@ public class UserRepository implements DAO<User>{
         }
         return users;
     }
+
     @Override
-    public User getByID(int id) {
+    public User getById(int id) {
         return null;
     }
     @Override
@@ -72,7 +73,7 @@ public class UserRepository implements DAO<User>{
     }
     @Override
     public boolean deleteById(int id) {
-        return false:
+        return false;
     }
 
 }

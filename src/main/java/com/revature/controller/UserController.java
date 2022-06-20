@@ -18,11 +18,11 @@ public class UserController {
     }
     public Handler getAllUsers = context -> {
         context.json(userService.getAllUsers());
-    }
-    public Handler createNewUser = context -> {
+    };
+    public Handler createUser = context -> {
         User user = context.bodyAsClass(User.class);
         userService.createUser(user);
-    }
+    };
 
 
 

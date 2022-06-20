@@ -1,7 +1,12 @@
 package com.revature.controller;
 
+import com.revature.model.Car;
 import com.revature.service.CarService;
 import io.javalin.http.Handler;
+
+import java.util.ArrayList;
+import java.util.List;
+package com.revature.controller;
 
 /* car controller will give us the leverage to use our business logic which is held in our service package (CarService class
 in this case)
@@ -13,14 +18,16 @@ the handler is the 2nd parameter in each CRUD method
 public class CarController {
 
     //initializing a carservice object of clas CarService. we can use this object to retrieve states and behaviors from within the CarService class
-    CarService carservice = new CarService();
+    CarService carService = new CarService();
 
     // handler is a functional interface with a method that handles. context is a parameter in the handles method
-    public Handler carViewServices = context-> {
-        context.result("View all cars here");
+    public Handler getAllCars = context-> {
+        context.json(carService.getAllCars());
+        };
+    public Handler createNewCar = context-> {
+        Car car = context.bodyAsClass(Car.class);
+        CarService.createCar(car);
+
     };
-
-
-
 
 }
