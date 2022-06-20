@@ -7,21 +7,27 @@ import java.util.List;
 
 public class CarService {
 
-    private CarRepository carRepository;
+    public static CarRepository carRepository;
 
     public CarService() {
         carRepository = new CarRepository();
     }
+
     public CarService(CarRepository carRepository) {
-        this.carRepository = carRepository
+        this.carRepository = carRepository;
     }
-    public static Car createCar(Car car) {
+
+    public static Car createNewCar(Car car) {
         return carRepository.create(car);
     }
+
     public List<Car> getAllCars() {
         return carRepository.getAll();
     }
-    public List<Car> getAllCarsByMake(Make make){
+
+}
+
+   /* public List<Car> getAllCarsByMake(Make make){
         return carRepository.getAllByMake(make);
     }
     public Car getCarByID(int vin) {
@@ -34,3 +40,4 @@ public class CarService {
         System.out.println(something());
     }
 }
+    */

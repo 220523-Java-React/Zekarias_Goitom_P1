@@ -6,7 +6,7 @@ import io.javalin.http.Handler;
 
 import java.util.ArrayList;
 import java.util.List;
-package com.revature.controller;
+
 
 /* car controller will give us the leverage to use our business logic which is held in our service package (CarService class
 in this case)
@@ -24,10 +24,12 @@ public class CarController {
     public Handler getAllCars = context-> {
         context.json(carService.getAllCars());
         };
-    public Handler createNewCar = context-> {
+    public Handler setCar = context-> {
         Car car = context.bodyAsClass(Car.class);
-        CarService.createCar(car);
+        CarService.createNewCar(car);
 
     };
+
+
 
 }

@@ -61,7 +61,7 @@ public class Driver {
         //context is a lambda function(method) which allows us to create in-line implementation of an interface
         app.get("/", context-> context.result("Welcome to Java's Dealership"));
         app.get("/cars", carController.getAllCars);
-        app.post("/cars", carController.createNewCar);
+        app.post("/cars", carController.setCgar);
 
         app.get("/users", userController.getAllUsers);
         app.post("/users", userController.createUser);

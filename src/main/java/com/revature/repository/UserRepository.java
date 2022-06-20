@@ -29,7 +29,7 @@ public class UserRepository implements DAO<User>{
             e.printStackTrace();
 
         }
-        return null;
+        return user;
     }
 
     @Override

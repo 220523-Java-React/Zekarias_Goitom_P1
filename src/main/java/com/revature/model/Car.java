@@ -22,7 +22,7 @@ public class Car {
         return id;
     }
 
-    public void setId(int id){
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -72,5 +72,6 @@ public class Car {
                 ", model='" + model + '\'' +
                 ", color=" + color +
                 '}';
+    }
 }
 

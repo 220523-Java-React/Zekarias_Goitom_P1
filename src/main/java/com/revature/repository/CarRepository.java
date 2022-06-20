@@ -16,9 +16,9 @@ public class CarRepository implements DAO<Car> {
         String sql = "insert into car(make, model, color) values(?, ?, ?)";
 
 
-        try(Connection connection = ConnectionUtility.getConnection()){
+        try (Connection connection = ConnectionUtility.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setString( 1, car.getMake());
+            stmt.setString(1, car.getMake());
             stmt.setString(2, car.getModel());
             stmt.setString(3, car.getColor());
 
@@ -28,20 +28,21 @@ public class CarRepository implements DAO<Car> {
             e.printStackTrace();
 
         }
-        return null;
+        return car;
     }
+
     @Override
-    public List<Car> getAll(){
+    public List<Car> getAll() {
         // Empty lists of users, will add any new users from the result set
         List<Car> cars = new ArrayList<>();
         String sql = "select * from cars";
 
-        try(Connection connection = ConnectionUtility.getConnection()){
+        try (Connection connection = ConnectionUtility.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(sql);
 
             ResultSet results = stmt.executeQuery();
 
-            while(results.next()){
+            while (results.next()) {
                 // go through each result, build a User object for that data, add that user object the users list
                 Car car = new Car();
 
@@ -55,7 +56,7 @@ public class CarRepository implements DAO<Car> {
             }
 
 
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -76,7 +77,8 @@ public class CarRepository implements DAO<Car> {
     public boolean deleteById(int id) {
         return false;
     }
-
+}
+/*
     @Override
     public Car getByVin(int vin) {
         return null;
@@ -88,3 +90,4 @@ public class CarRepository implements DAO<Car> {
     public Car getCarById(int id) {
     }
 }
+*/

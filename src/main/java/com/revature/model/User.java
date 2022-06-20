@@ -89,10 +89,10 @@ class attributes and parameters with the same name
     }
     @Override
     public boolean equals(Object o) {
-        if (this == ) return true;
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass());
         User user = (User) o;
-        return id == user.id && Objects.equals(fName, user.fName) == Objects.equals(lName, user.lName) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && role == user.role;
+        return id == user.id && Objects.equals(fName, user.fName) == Objects.equals(lName, user.lName) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && roleEmployee == user.roleEmployee;
     }
     @Override
     public int hashCode() {

@@ -11,6 +11,7 @@ public class UserService {
     public UserService() {
         userRepository = new UserRepository();
     }
+
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -19,10 +20,13 @@ public class UserService {
         return userRepository.create(user);
 
     }
+
     public List<User> getAllUsers() {
         return userRepository.getAll();
     }
-    public User getUserById(int id) {
+}
+
+  /*  public User getUserById(int id) {
         return userRepository.getByID(id);
 
     }
@@ -30,3 +34,4 @@ public class UserService {
         return userRepository.deleteById(id);
     }
 }
+*/
