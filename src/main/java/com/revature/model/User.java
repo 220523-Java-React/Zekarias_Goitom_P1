@@ -44,48 +44,54 @@ class attributes and parameters with the same name
     public int getId() {
         return id;
     }
-    public void setId (int id) {
+    public User setId (int id) {
         this.id = id;
+        return this;
     }
 
     public String getFName() {
         return fName;
     }
 
-    public void setFName(String fName) {
+    public User setFName(String fName) {
         this.fName = fName;
+        return this;
     }
 
     public String getLName() {
         return lName;
     }
 
-    public void setLName(String lName) {
+    public User setLName(String lName) {
         this.lName = lName;
+        return this;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public User setUsername(String username) {
         this.username = username;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public User setPassword(String password) {
         this.password = password;
+        return this;
     }
 
     public Role getRoleCustomer() {
         return roleCustomer;
     }
 
-    public void setRoleCustomer(Role role) {
+    public User setRoleCustomer(Role role) {
         this.roleCustomer = role;
+        return this;
     }
     @Override
     public boolean equals(Object o) {

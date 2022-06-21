@@ -29,14 +29,6 @@ public class Driver {
 
     //the entry point of our class begins at the main method. it's the engine for this whole app
     public static void main(String[] args) {
-        List<String> list = new ArrayList<>();
-        List<Integer> intList = new ArrayList<>();
-
-        int x = 1;
-        Integer wrapInt = x; // autoboxing Integer so that we can use the methods of the Integer class/object
-
-        intList.add(x);
-        int y = intList.get(0); // unboxing the
 
 
         //creates an instance of the UserController class. This will allow us to access it behaviors and states here in this class
@@ -61,9 +53,12 @@ public class Driver {
         //context is a lambda function(method) which allows us to create in-line implementation of an interface
         app.get("/", context-> context.result("Welcome to Java's Dealership"));
         app.get("/cars", carController.getAllCars);
-        app.post("/cars", carController.setCgar);
+        app.get("/cars/{id}", carController.getCarById);
+        app.post("/cars", carController.setCar);
+
 
         app.get("/users", userController.getAllUsers);
+        app.get("/users/{id}", userController.getUserById);
         app.post("/users", userController.createUser);
 
 

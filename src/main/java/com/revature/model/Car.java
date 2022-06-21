@@ -1,8 +1,9 @@
 package com.revature.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Car {
+public class Car implements Serializable {
     private int id;
     private String make;
     private String model;
@@ -22,33 +23,37 @@ public class Car {
         return id;
     }
 
-    public void setId(int id) {
+    public Car setId(int id) {
         this.id = id;
+        return this;
     }
 
     public String getMake() {
         return make;
     }
 
-    public void setMake(String make) {
+    public Car setMake(String make) {
         this.make = make;
+        return this;
     }
 
     public String getModel() {
         return model;
     }
 
-    public void setModel(String model) {
+    public Car setModel(String model) {
         this.model = model;
+        return this;
     }
 
     public String getColor() {
-
         return color;
     }
 
-    public void setColor(String color) {
+    public Car setColor(String color) {
         this.color = color;
+
+        return this;
     }
 
     @Override

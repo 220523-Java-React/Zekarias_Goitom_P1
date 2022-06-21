@@ -29,13 +29,13 @@ public class UserRepository implements DAO<User>{
             e.printStackTrace();
 
         }
-        return user;
+        return null;
     }
 
     @Override
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
-        String sql = "select * from users";
+        String sql = "select * from users order by id";
 
         try(Connection connection = ConnectionUtility.getConnection()){
             PreparedStatement stmt = connection.prepareStatement(sql);
@@ -52,6 +52,7 @@ public class UserRepository implements DAO<User>{
                 user.setPassword((results.getString("password")));
                 user.setId(results.getInt("id"));
 
+
                 users.add(user);
 
             }
@@ -67,6 +68,8 @@ public class UserRepository implements DAO<User>{
     public User getById(int id) {
         return null;
     }
+
+
     @Override
     public User update(User user) {
         return null;
@@ -76,4 +79,27 @@ public class UserRepository implements DAO<User>{
         return false;
     }
 
+    @Override
+    public User getByID(int id) {
+        String sql = "select * from users where id = ?";
+        try(Connection connection = ConnectionUtility.getConnection()){
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                // build return the user and return it
+                return new User()
+                        .setId(rs.getInt("id"))
+                        .setFName(rs.getString("first_name"))
+                        .setLName(rs.getString("last_name"))
+                        .setUsername(rs.getString("username"))
+                        .setPassword(rs.getString("password"));
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+
+    }
 }

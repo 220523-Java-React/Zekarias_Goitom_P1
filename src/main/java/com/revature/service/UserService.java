@@ -24,12 +24,14 @@ public class UserService {
     public List<User> getAllUsers() {
         return userRepository.getAll();
     }
+
+    public User getUserById(int id) {
+        return userRepository.getByID(id);
+    }
 }
 
-  /*  public User getUserById(int id) {
-        return userRepository.getByID(id);
+/*
 
-    }
     public boolean deleteUserById(int id) {
         return userRepository.deleteById(id);
     }

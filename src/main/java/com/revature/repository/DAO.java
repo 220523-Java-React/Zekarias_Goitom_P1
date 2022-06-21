@@ -1,22 +1,23 @@
 package com.revature.repository;
 
+import com.revature.model.User;
+
 import java.util.List;
 
 // T is a generic class data type
-public interface DAO <T> {
-   //these are the methods and variables of this interface. They will be guidelines of how to use these states and
-    //behaviors to the classes that implement this interface
-    T create(T t);
+public interface DAO<T> {
 
-    List<T> getAll();
+ T create(T t);
 
-    T getById(int id);
+ User create(User user);
 
-    T update(T t);
+ List<T> getAll();
 
-    boolean deleteById(int id);
+ T getById(int id);
 
+ T update(T t);
 
+ boolean deleteById(int id);
 
-
+ User getByID(int id);
 }
