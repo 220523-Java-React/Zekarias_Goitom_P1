@@ -18,8 +18,8 @@ public class User implements Serializable {
     private String username;
     private String password;
    // roles include: customer, employee. how should these roles be incorporated to manifest their functions
-    private Role roleCustomer = Role.CUSTOMER;
-    private Role roleEmployee = Role.EMPLOYEE;
+
+    private Role role;
 
     public User(){
 
@@ -85,12 +85,12 @@ class attributes and parameters with the same name
         return this;
     }
 
-    public Role getRoleCustomer() {
-        return roleCustomer;
+    public Role getRole() {
+        return role;
     }
 
-    public User setRoleCustomer(Role role) {
-        this.roleCustomer = role;
+    public User setRole(Role role) {
+        this.role = role;
         return this;
     }
     @Override
@@ -98,11 +98,11 @@ class attributes and parameters with the same name
         if (this == o) return true;
         if (o == null || getClass() != o.getClass());
         User user = (User) o;
-        return id == user.id && Objects.equals(fName, user.fName) == Objects.equals(lName, user.lName) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && roleEmployee == user.roleEmployee;
+        return id == user.id && Objects.equals(fName, user.fName) == Objects.equals(lName, user.lName) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && role == user.role;
     }
     @Override
     public int hashCode() {
-        return Objects.hash(id, fName, lName, username, password);
+        return Objects.hash(id, fName, lName, username, password, role);
     }
 
     public String toString() {
@@ -112,7 +112,7 @@ class attributes and parameters with the same name
                 ", lastName ='" + lName + '\'' +
                 ", username ='" + username + '\'' +
                 ", password ='" + password + '\'' +
-                ", role ='" + roleCustomer +
+                ", role ='" + role +
                 '}';
 
     }

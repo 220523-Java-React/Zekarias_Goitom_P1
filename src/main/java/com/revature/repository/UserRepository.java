@@ -3,31 +3,40 @@ package com.revature.repository;
 import com.revature.model.User;
 import com.revature.util.ConnectionUtility;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepository implements DAO<User>{
     @Override
     public User create(User user) {
-        String sql = "insert into users(first_name, last_name, username, password) values(?, ?, ?, ?)";
+        // we are receiving a full user object
+        // we need a query to insert that record
+        //                                                                                1,2,3,4,5
+        String sql = "insert into users(first_name, last_name, username, password, role_id) values(?,?,?,?,?)";
 
+        /*
+                This is a Try-With-Resources block
+                used when you have resources that have open channels that you need to eventually close
 
+                try with resource WILL automatically close anything that implements the AutoClosable interface
+         */
         try(Connection connection = ConnectionUtility.getConnection()){
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setString( 1, user.getFName());
+            PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, user.getFName());
             stmt.setString(2, user.getLName());
             stmt.setString(3, user.getUsername());
             stmt.setString(4, user.getPassword());
+            stmt.setInt(5, user.getRole().ordinal());
 
             int success = stmt.executeUpdate();
-
+            ResultSet keys = stmt.getGeneratedKeys();
+            if(keys.next()) {
+                int id = keys.getInt(1);
+                return user.setId(id);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-
         }
         return null;
     }

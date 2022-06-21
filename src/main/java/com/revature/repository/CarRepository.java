@@ -10,13 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarRepository implements DAO<Car> {
-    @Override
-    public Car create(Car car) {
-        return null;
-    }
 
     @Override
-    public User create(User user) {
+    public Car create(Car car) {
         // we are receiving a full user object
         // we need a query to insert that record
         //                                                                                1,2,3,4,5
@@ -30,21 +26,25 @@ public class CarRepository implements DAO<Car> {
          */
         try(Connection connection = ConnectionUtility.getConnection()){
             PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, user.getFName());
-            stmt.setString(2, user.getLName());
-            stmt.setString(3, user.getUsername());
-            stmt.setString(4, user.getPassword());
-            stmt.setInt(5, user.getRole().ordinal());
+            stmt.setString(1, car.getMake());
+            stmt.setString(2, car.getModel());
+            stmt.setString(3, car.getColor());
+
 
             int success = stmt.executeUpdate();
             ResultSet keys = stmt.getGeneratedKeys();
             if(keys.next()) {
                 int id = keys.getInt(1);
-                return user.setId(id);
+                return car.setId(id);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    @Override
+    public User create(User user) {
         return null;
     }
 
