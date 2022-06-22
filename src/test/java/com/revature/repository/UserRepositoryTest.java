@@ -1,4 +1,4 @@
-package repository;
+package com.revature.repository;
 
 import com.revature.repository.UserRepository;
 import org.junit.jupiter.api.Test;

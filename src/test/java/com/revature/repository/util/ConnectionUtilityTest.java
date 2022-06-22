@@ -1,5 +1,6 @@
-package com.revature.util;
+package com.revature.repository.util;
 
+import com.revature.util.ConnectionUtility;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

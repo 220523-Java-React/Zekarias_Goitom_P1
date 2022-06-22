@@ -1,4 +1,4 @@
-package unit.service;
+package com.revature.repository.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -23,11 +23,11 @@ public class CarServiceUnitTest {
         }
 
 //    @Test
-//    public void whenGivenFlashcardObjectCreateNewFlashcardReturnsTrue(){
-//        Flashcard flashcard = new Flashcard();
-//        FlashcardService service = new FlashcardService();
-//        Mockito.when(mockList.add(flashcard)).thenReturn(true);
-//        boolean result = service.createNewFlashcard(flashcard);
+//    public void whenGivenCarObjectCreateNewCarReturnsTrue(){
+//        Car car = new Car();
+//        CarService service = new CarService();
+//        Mockito.when(mockList.add(car)).thenReturn(true);
+//        boolean result = service.createNewCar(car);
 //        Assertions.assertTrue(result);
 //    }
 
@@ -42,15 +42,15 @@ public class CarServiceUnitTest {
 
 
 //    @Test
-//    public void whenGivenValidIdGetFlashcardByIdReturnsFlashcardWithThatId(){
+//    public void whenGivenValidIdGetCarByIdReturnsWithThatCarId(){
 //        Flashcard flashcard = new Flashcard(0, "question", "answer");
 //
 //        // fake the size of the list when it is called
 //        Mockito.when(mockList.size()).thenReturn(1);
-//        Mockito.when(mockList.get(0)).thenReturn(flashcard);
-//        FlashcardService service = new FlashcardService(mockList);
-//        Flashcard result = service.getFlashcardById(0);
-//        Assertions.assertEquals(flashcard, result);
+//        Mockito.when(mockList.get(0)).thenReturn(car);
+//        CarService service = new CarService(mockList);
+//        Car result = service.getCarById(0);
+//        Assertions.assertEquals(car, result);
 //    }
-    }
+
 }
