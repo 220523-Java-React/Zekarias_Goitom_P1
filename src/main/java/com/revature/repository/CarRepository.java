@@ -14,10 +14,10 @@ public class CarRepository implements DAO<Car> {
 
     @Override
     public Car create(Car car) {
-        // we are receiving a full user object
+        // we are receiving a full car object
         // we need a query to insert that record
         //
-        String sql = "insert into cars(id, make, model, color) values(?,?,?,?)";
+        String sql = "insert into cars(make, model, color, id) values(?,?,?,?)";
 
         /*
                 This is a Try-With-Resources block
@@ -26,18 +26,18 @@ public class CarRepository implements DAO<Car> {
                 try with resource WILL automatically close anything that implements the AutoClosable interface
          */
         try(Connection connection = ConnectionUtility.getConnection()){
-            PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stmt = connection.prepareStatement(sql); // Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, car.getMake());
             stmt.setString(2, car.getModel());
             stmt.setString(3, car.getColor());
             stmt.setInt(4, car.getId());
 
             int success = stmt.executeUpdate();
-            ResultSet keys = stmt.getGeneratedKeys();
+           /* ResultSet keys = stmt.getGeneratedKeys();
             if(keys.next()) {
                 int id = keys.getInt(1);
                 return car.setId(id);
-            }
+            }*/
         } catch (SQLException e) {
             e.printStackTrace();
         }

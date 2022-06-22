@@ -1,20 +1,21 @@
 package com.revature;
 
-//revature packages
+//revature packages//
 import com.revature.controller.CarController;
+import com.revature.controller.OfferController;
 import com.revature.controller.UserController;
 import com.revature.model.User;
 import com.revature.model.Car;
 
-//revature package for Database connection
+//revature package for Database connection//
 import com.revature.util.ConnectionUtility;
 
-//Gradle dependency libraries
+//Gradle dependency libraries//
 import io.javalin.Javalin;
 import io.javalin.http.HandlerType;
 import org.eclipse.jetty.http.HttpMethod;
 
-//java based libraries
+//java based libraries//
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -61,7 +62,13 @@ public class Driver {
         app.get("/users/{id}", userController.getUserById);
         app.post("/users", userController.createUser);
 
-        app.get("/offers, offerController.getAllOffers");
+        //offerController object initialized
+        OfferController offerController = new OfferController();
+
+        //driver points to OfferController class
+        app.get("/offers", offerController.getAllOffers);
+        app.post("/offers", offerController.createOffer);
+        app.get("/offers/{open}", offerController.getopenoffers);
 
 
 

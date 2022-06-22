@@ -14,7 +14,7 @@ public class UserRepository implements DAO<User> {
         // we are receiving a full user object
         // we need a query to insert that record
         //                                                                                1,2,3,4,5
-        String sql = "insert into users(first_name, last_name, username, password, role_id) values(?,?,?,?,?)";
+        String sql = "insert into users(first_name, last_name, username, password, role_id), id values(?,?,?,?,?)";
 
         /*
                 This is a Try-With-Resources block
@@ -29,6 +29,7 @@ public class UserRepository implements DAO<User> {
             stmt.setString(3, user.getUsername());
             stmt.setString(4, user.getPassword());
             stmt.setInt(5, user.getRole().ordinal());
+            stmt.setInt(6, user.getId());
 
             int success = stmt.executeUpdate();
             ResultSet keys = stmt.getGeneratedKeys();
@@ -84,7 +85,7 @@ public class UserRepository implements DAO<User> {
     public boolean deleteById(int id) {
         return false;
     }
-    
+
     @Override
     public User getByID(int id) {
         String sql = "select * from users where id = ?";
