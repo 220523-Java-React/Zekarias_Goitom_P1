@@ -25,6 +25,7 @@ public class UserService {
         return userRepository.getAll();
     }
 
+
     public User getUserById(int id) {
         return userRepository.getByID(id);
     }

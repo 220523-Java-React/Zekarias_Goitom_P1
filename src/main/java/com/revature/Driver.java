@@ -61,6 +61,8 @@ public class Driver {
         app.get("/users/{id}", userController.getUserById);
         app.post("/users", userController.createUser);
 
+        app.get("/offers, offerController.getAllOffers");
+
 
 
 

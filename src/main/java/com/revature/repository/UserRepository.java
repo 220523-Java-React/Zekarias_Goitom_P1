@@ -1,5 +1,6 @@
 package com.revature.repository;
 
+import com.revature.model.Role;
 import com.revature.model.User;
 import com.revature.util.ConnectionUtility;
 
@@ -7,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserRepository implements DAO<User>{
+public class UserRepository implements DAO<User> {
     @Override
     public User create(User user) {
         // we are receiving a full user object
@@ -21,7 +22,7 @@ public class UserRepository implements DAO<User>{
 
                 try with resource WILL automatically close anything that implements the AutoClosable interface
          */
-        try(Connection connection = ConnectionUtility.getConnection()){
+        try (Connection connection = ConnectionUtility.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, user.getFName());
             stmt.setString(2, user.getLName());
@@ -31,7 +32,7 @@ public class UserRepository implements DAO<User>{
 
             int success = stmt.executeUpdate();
             ResultSet keys = stmt.getGeneratedKeys();
-            if(keys.next()) {
+            if (keys.next()) {
                 int id = keys.getInt(1);
                 return user.setId(id);
             }
@@ -43,39 +44,34 @@ public class UserRepository implements DAO<User>{
 
     @Override
     public List<User> getAll() {
+        // Empty lists of users, will add any new users from the result set
         List<User> users = new ArrayList<>();
         String sql = "select * from users order by id";
 
-        try(Connection connection = ConnectionUtility.getConnection()){
+        try (Connection connection = ConnectionUtility.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(sql);
 
-            ResultSet results = stmt. executeQuery();
+            ResultSet results = stmt.executeQuery();
 
-            while(results.next()){
+            while (results.next()) {
+                // go through each result, build a User object for that data, add that user object the users list
+                users.add(new User()
 
-                User user = new User();
-
-                user.setFName(results.getString("first_name"));
-                user.setLName(results.getString("last_name"));
-                user.setUsername(results.getString("username"));
-                user.setPassword((results.getString("password")));
-                user.setId(results.getInt("id"));
-
-
-                users.add(user);
-
+                        .setFName(results.getString("first_name"))
+                        .setLName(results.getString("last_name"))
+                        .setUsername(results.getString("username"))
+                        .setPassword(results.getString("password"))
+                        .setId(results.getInt("id"))
+                        .setRole(Role.values()[results.getInt("role_id")])
+                );
             }
 
-        }catch (SQLException e){
+
+        } catch (SQLException e) {
             e.printStackTrace();
-
         }
-        return users;
-    }
 
-    @Override
-    public User getById(int id) {
-        return null;
+        return users;
     }
 
 
@@ -83,11 +79,12 @@ public class UserRepository implements DAO<User>{
     public User update(User user) {
         return null;
     }
+
     @Override
     public boolean deleteById(int id) {
         return false;
     }
-
+    
     @Override
     public User getByID(int id) {
         String sql = "select * from users where id = ?";

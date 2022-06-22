@@ -9,7 +9,6 @@ public interface DAO<T> {
 
  T create(T t);
 
- User create(User user);
 
  List<T> getAll();
 
@@ -19,5 +18,4 @@ public interface DAO<T> {
 
  boolean deleteById(int id);
 
- User getByID(int id);
 }

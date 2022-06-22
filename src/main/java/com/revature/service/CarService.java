@@ -3,6 +3,7 @@ package com.revature.service;
 import com.revature.model.Car;
 import com.revature.model.User;
 import com.revature.repository.CarRepository;
+import com.revature.repository.UserRepository;
 
 import java.util.List;
 
@@ -10,27 +11,31 @@ public class CarService {
 
     static CarRepository carRepository;
 
-    public CarService() {
+    public CarService(){
         carRepository = new CarRepository();
     }
 
-    public CarService(CarRepository carRepository) {
-        CarService.carRepository = carRepository;
+    public CarService(CarRepository carRepository){
+        this.carRepository = carRepository;
     }
 
-    public static Car createNewCar(Car car) {
+    public static Car createNewCar(Car car){
         return carRepository.create(car);
     }
 
-    public List<Car> getAllCars() {
+    public List<Car> getAllCars(){
         return carRepository.getAll();
     }
 
-
-    public Car getCarById(int id) {
+    public Car getCarById(int id){
         return carRepository.getById(id);
     }
+
+    public boolean deleteCarById(int id){
+        return carRepository.deleteById(id);
+    }
 }
+
 
    /* public List<Car> getAllCarsByMake(Make make){
         return carRepository.getAllByMake(make);
