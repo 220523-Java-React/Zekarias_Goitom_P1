@@ -1,15 +1,15 @@
 package com.revature.service;
 
 import com.revature.model.Car;
-import com.revature.model.User;
+
 import com.revature.repository.CarRepository;
-import com.revature.repository.UserRepository;
+
 
 import java.util.List;
 
 public class CarService {
 
-    static CarRepository carRepository;
+    CarRepository carRepository;
 
     public CarService(){
         carRepository = new CarRepository();
@@ -19,7 +19,7 @@ public class CarService {
         this.carRepository = carRepository;
     }
 
-    public static Car createNewCar(Car car){
+    public Car createNewCar(Car car){
         return carRepository.create(car);
     }
 

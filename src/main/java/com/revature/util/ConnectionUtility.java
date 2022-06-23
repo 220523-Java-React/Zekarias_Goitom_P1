@@ -11,14 +11,6 @@ public class ConnectionUtility {
     private static Connection instance;
     private static Properties properties;
 
-
-    /**
-     JDBC API
-     Java DataBase Connectivity
-     Has all the interfaces and objects that we need in our app to work with a database
-
-     We will bring in a Postgres driver that will satisfy the implementation
-     */
     public static Connection getConnection() throws SQLException{
 
         if(properties == null){

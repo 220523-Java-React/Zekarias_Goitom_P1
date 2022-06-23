@@ -1,7 +1,7 @@
 package com.revature.controller;
 
 import com.revature.model.Car;
-import com.revature.model.User;
+
 import com.revature.service.CarService;
 import io.javalin.http.Handler;
 import org.eclipse.jetty.http.HttpStatus;
@@ -28,7 +28,7 @@ public class CarController {
         };
     public Handler setCar = context-> {
         Car car = context.bodyAsClass(Car.class);
-        CarService.createNewCar(car);
+        carService.createNewCar(car);
 
     };
     public Handler getCarById = context -> {
@@ -40,7 +40,7 @@ public class CarController {
                     Integer.parseInt(param)
             );
             if(car != null){
-                // valid user, return it
+                // valid car, return it
                 context.json(car);
             } else {
                 // couldn't find the user, return a 404

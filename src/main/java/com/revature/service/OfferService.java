@@ -20,6 +20,6 @@ public class OfferService {
         return offerRepository.getAll();
     };
 
-    public Offer createOffer(Offer offer) {return OfferRepository.create(offer);
+    public Offer createOffer(Offer offer) {return offerRepository.create(offer);
     }
 }

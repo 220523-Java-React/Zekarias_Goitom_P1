@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OfferRepository implements DAO<Offer>{
-    @Override
+
     public Offer create(Offer offer) {
-        String sql = "insert into offers(open, approved, rejected, password, id) values(?,?,?,?,?)";
+        String sql = "insert into offers(open, approved, rejected, id) values(?,?,?,?)";
 
         /*
                 This is a Try-With-Resources block
@@ -36,7 +36,7 @@ public class OfferRepository implements DAO<Offer>{
         }
         return null;
     }
-    }
+
 
     @Override
     public List<Offer> getAll(){

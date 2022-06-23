@@ -14,7 +14,7 @@ public class UserRepository implements DAO<User> {
         // we are receiving a full user object
         // we need a query to insert that record
         //                                                                                1,2,3,4,5
-        String sql = "insert into users(first_name, last_name, username, password, role_id), id values(?,?,?,?,?)";
+        String sql = "insert into users(fname, lname,username, password, id) values(?,?,?,?,?)";
 
         /*
                 This is a Try-With-Resources block
@@ -28,8 +28,8 @@ public class UserRepository implements DAO<User> {
             stmt.setString(2, user.getLName());
             stmt.setString(3, user.getUsername());
             stmt.setString(4, user.getPassword());
-            stmt.setInt(5, user.getRole().ordinal());
-            stmt.setInt(6, user.getId());
+          //  stmt.setInt(5, user.getRole().ordinal());
+            stmt.setInt(5, user.getId());
 
             int success = stmt.executeUpdate();
             ResultSet keys = stmt.getGeneratedKeys();
@@ -58,12 +58,12 @@ public class UserRepository implements DAO<User> {
                 // go through each result, build a User object for that data, add that user object the users list
                 users.add(new User()
 
-                        .setFName(results.getString("first_name"))
-                        .setLName(results.getString("last_name"))
+                        .setFName(results.getString("fname"))
+                        .setLName(results.getString("lname"))
                         .setUsername(results.getString("username"))
                         .setPassword(results.getString("password"))
                         .setId(results.getInt("id"))
-                        .setRole(Role.values()[results.getInt("role_id")])
+                        .setRole(Role.values()[results.getInt("role")])
                 );
             }
 
@@ -73,6 +73,11 @@ public class UserRepository implements DAO<User> {
         }
 
         return users;
+    }
+
+    @Override
+    public User getById(int id) {
+        return null;
     }
 
 
@@ -86,7 +91,7 @@ public class UserRepository implements DAO<User> {
         return false;
     }
 
-    @Override
+
     public User getByID(int id) {
         String sql = "select * from users where id = ?";
         try(Connection connection = ConnectionUtility.getConnection()){
@@ -98,8 +103,8 @@ public class UserRepository implements DAO<User> {
                 // build return the user and return it
                 return new User()
                         .setId(rs.getInt("id"))
-                        .setFName(rs.getString("first_name"))
-                        .setLName(rs.getString("last_name"))
+                        .setFName(rs.getString("fname"))
+                        .setLName(rs.getString("lname"))
                         .setUsername(rs.getString("username"))
                         .setPassword(rs.getString("password"));
             }
@@ -109,4 +114,9 @@ public class UserRepository implements DAO<User> {
         return null;
 
     }
+
+  /*  public User getByUsername(String username) {
+    }
+
+   */
 }

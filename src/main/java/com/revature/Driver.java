@@ -68,7 +68,7 @@ public class Driver {
         //driver points to OfferController class
         app.get("/offers", offerController.getAllOffers);
         app.post("/offers", offerController.createOffer);
-        app.get("/offers/{open}", offerController.getopenoffers);
+      //  app.get("/offers/{open}", offerController.getopenoffers);
 
 
 
