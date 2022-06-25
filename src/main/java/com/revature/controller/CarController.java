@@ -5,6 +5,8 @@ import com.revature.model.Car;
 import com.revature.service.CarService;
 import io.javalin.http.Handler;
 import org.eclipse.jetty.http.HttpStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,8 @@ the handler is the 2nd parameter in each CRUD method
 
 public class CarController {
 
+    private static final Logger logger = LoggerFactory.getLogger(CarController.class);
+
     //initializing a carservice object of clas CarService. we can use this object to retrieve states and behaviors from within the CarService class
     CarService carService = new CarService();
 
@@ -32,23 +36,23 @@ public class CarController {
 
     };
     public Handler getCarById = context -> {
+        // how do I pass more information when asking for information
         String param = context.pathParam("id");
-
+        int id = 0;
         try{
-            // hopefully is not null
-            Car car = carService.getCarById(
-                    Integer.parseInt(param)
-            );
+            id = Integer.parseInt(param);
+            Car car = carService.getCarById(id);
             if(car != null){
-                // valid car, return it
                 context.json(car);
             } else {
-                // couldn't find the user, return a 404
-                context.result("Car not found").status(404);
+                context.result("Flashcard not found").status(404);
             }
-        } catch(NumberFormatException e){
-            context.result("Please submit an integer as an id");
-            context.status(400);
+        } catch (NumberFormatException e){
+            // i would log it
+            context.result("Stop giving me words as IDS");
+            context.status(HttpStatus.BAD_REQUEST_400);
+        } catch(NullPointerException e){
+            logger.warn(e.getMessage());
         }
     };
 

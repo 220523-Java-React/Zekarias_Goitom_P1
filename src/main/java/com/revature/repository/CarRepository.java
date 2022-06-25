@@ -49,7 +49,7 @@ public class CarRepository implements DAO<Car> {
     public List<Car> getAll(){
         // Empty lists of users, will add any new users from the result set
         List<Car> cars = new ArrayList<>();
-        String sql = "select * from users order by id";
+        String sql = "select * from cars order by id";
 
         try(Connection connection = ConnectionUtility.getConnection()){
             PreparedStatement stmt = connection.prepareStatement(sql);

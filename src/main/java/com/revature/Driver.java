@@ -4,22 +4,17 @@ package com.revature;
 import com.revature.controller.CarController;
 import com.revature.controller.OfferController;
 import com.revature.controller.UserController;
-import com.revature.model.User;
-import com.revature.model.Car;
+
+import com.revature.model.Role;
 
 //revature package for Database connection//
 import com.revature.util.ConnectionUtility;
 
 //Gradle dependency libraries//
 import io.javalin.Javalin;
-import io.javalin.http.HandlerType;
-import org.eclipse.jetty.http.HttpMethod;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-//java based libraries//
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.function.Predicate;
 
 
 /* the driver class will be the engine of the app/web server
@@ -30,6 +25,7 @@ public class Driver {
 
     //the entry point of our class begins at the main method. it's the engine for this whole app
     public static void main(String[] args) {
+        Logger logger = LoggerFactory.getLogger(Driver.class);
 
 
         //creates an instance of the UserController class. This will allow us to access it behaviors and states here in this class
@@ -60,7 +56,9 @@ public class Driver {
 
         app.get("/users", userController.getAllUsers);
         app.get("/users/{id}", userController.getUserById);
-        app.post("/users", userController.createUser);
+        app.post("/users", userController.createNewUser);
+        app.put("/users", userController.updateUser);
+        app.delete("/users/{id}", userController.deleteUserById);
 
         //offerController object initialized
         OfferController offerController = new OfferController();
