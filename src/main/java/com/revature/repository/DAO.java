@@ -18,4 +18,5 @@ public interface DAO<T> {
 
  boolean deleteById(int id);
 
+    int count();
 }

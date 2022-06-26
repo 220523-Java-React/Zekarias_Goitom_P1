@@ -108,6 +108,11 @@ public class CarRepository implements DAO<Car> {
         return false;
     }
 
+    @Override
+    public int count() {
+        return 0;
+    }
+
 }
 /*
     @Override

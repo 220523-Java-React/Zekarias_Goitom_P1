@@ -79,4 +79,14 @@ public class Car implements Serializable {
                 '}';
     }
 }
+/*
+    public Object getStatus() {
+        return null;
+    }
 
+    public Offer setStatus(CarStatus purchased) {
+        return null;
+    }
+}
+
+*/

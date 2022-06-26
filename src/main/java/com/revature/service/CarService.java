@@ -19,6 +19,11 @@ public class CarService {
         this.carRepository = carRepository;
     }
 
+    public static CarService getInstance() {
+        return null;
+    }
+
+
     public Car createNewCar(Car car){
         return carRepository.create(car);
     }
@@ -33,6 +38,9 @@ public class CarService {
 
     public boolean deleteCarById(int id){
         return carRepository.deleteById(id);
+    }
+
+    public void updateCarById(Car pendingCar) {
     }
 }
 

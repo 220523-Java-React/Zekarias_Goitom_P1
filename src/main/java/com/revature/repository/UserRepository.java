@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserRepository implements DAO<User>{
+public class UserRepository implements DAO<User> {
 
     private static final Logger logger = LoggerFactory.getLogger(UserRepository.class);
 
@@ -19,7 +19,7 @@ public class UserRepository implements DAO<User>{
         // we are receiving a full user object
         // we need a query to insert that record
         //                                                                                1,2,3,4,5
-        String sql = "insert into users(id, first_name, last_name, username, password, role_id) values(?,?,?,?,?)";
+        String sql = "insert into users(id, first_name, last_name, username, password, role_id) values(?,?,?,?,?,?)";
 
         /*
                 This is a Try-With-Resources block
@@ -27,7 +27,7 @@ public class UserRepository implements DAO<User>{
 
                 try with resource WILL automatically close anything that implements the AutoClosable interface
          */
-        try(Connection connection = ConnectionUtility.getConnection()){
+        try (Connection connection = ConnectionUtility.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, user.getFirstName());
             stmt.setString(2, user.getLastName());
@@ -38,7 +38,7 @@ public class UserRepository implements DAO<User>{
 
             int success = stmt.executeUpdate();
             ResultSet keys = stmt.getGeneratedKeys();
-            if(keys.next()) {
+            if (keys.next()) {
                 int id = keys.getInt(1);
                 return user.setId(id);
             }
@@ -49,18 +49,18 @@ public class UserRepository implements DAO<User>{
     }
 
     @Override
-    public List<User> getAll(){
+    public List<User> getAll() {
         // Empty lists of users, will add any new users from the result set
         List<User> users = new ArrayList<>();
         //setting a variable of type string and naming it sql than passing it a value with a sql statement
         String sql = "select * from users order by id";
 
-        try(Connection connection = ConnectionUtility.getConnection()){
+        try (Connection connection = ConnectionUtility.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(sql);
 
             ResultSet results = stmt.executeQuery();
 
-            while(results.next()){
+            while (results.next()) {
                 // go through each result, build a User object for that data, add that user object the users list
                 users.add(new User()
                         .setLastName(results.getString("last_name"))
@@ -71,7 +71,7 @@ public class UserRepository implements DAO<User>{
                         .setRole(Role.values()[results.getInt("role_id")])
                 );
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             logger.warn(e.getMessage());
         }
 
@@ -79,15 +79,15 @@ public class UserRepository implements DAO<User>{
     }
 
     @Override
-    public User getById(int id){
+    public User getById(int id) {
 
         String sql = "select * from users where id = ?";
-        try(Connection connection = ConnectionUtility.getConnection()){
+        try (Connection connection = ConnectionUtility.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, id);
 
             ResultSet rs = stmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 // build return the user and return it
                 return new User()
                         .setId(rs.getInt("id"))
@@ -97,24 +97,24 @@ public class UserRepository implements DAO<User>{
                         .setPassword(rs.getString("password"))
                         .setRole(Role.values()[rs.getInt("role_id")]);
             }
-        } catch(SQLException e){
+        } catch (SQLException e) {
             logger.warn(e.getMessage());
         }
         return null;
     }
 
-    public List<User> getAllByRole(Role role){
+    public List<User> getAllByRole(Role role) {
         // Empty lists of users, will add any new users from the result set
         List<User> users = new ArrayList<>();
         String sql = "select * from users where role_id = ? order by id";
 
-        try(Connection connection = ConnectionUtility.getConnection()){
+        try (Connection connection = ConnectionUtility.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, role.ordinal());
 
             ResultSet results = stmt.executeQuery();
 
-            while(results.next()){
+            while (results.next()) {
                 // go through each result, build a User object for that data, add that user object the users list
                 users.add(new User()
                         .setLastName(results.getString("last_name"))
@@ -125,21 +125,21 @@ public class UserRepository implements DAO<User>{
                         .setRole(Role.values()[results.getInt("role_id")])
                 );
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             logger.warn(e.getMessage());
         }
 
         return users;
     }
 
-    public User getByUsername(String username){
+    public User getByUsername(String username) {
         String sql = "select * from users where username = ?";
-        try(Connection connection = ConnectionUtility.getConnection()){
+        try (Connection connection = ConnectionUtility.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, username);
 
             ResultSet rs = stmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 // build return the user and return it
                 return new User()
                         .setId(rs.getInt("id"))
@@ -149,7 +149,7 @@ public class UserRepository implements DAO<User>{
                         .setPassword(rs.getString("password"))
                         .setRole(Role.values()[rs.getInt("role_id")]);
             }
-        } catch(SQLException e){
+        } catch (SQLException e) {
             logger.warn(e.getMessage());
         }
         return null;
@@ -159,7 +159,7 @@ public class UserRepository implements DAO<User>{
     public User update(User user) {
         String sql = "update users set first_name = ?, last_name = ?, username = ?, password = ?, role_id = ? where id = ?";
 
-        try(Connection connection = ConnectionUtility.getConnection()){
+        try (Connection connection = ConnectionUtility.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, user.getFirstName());
             stmt.setString(2, user.getLastName());
@@ -172,10 +172,10 @@ public class UserRepository implements DAO<User>{
             int success = stmt.executeUpdate();
 
             // if we successfully update the user, return the new database record for it
-            if(success != 0){
+            if (success != 0) {
                 return getById(user.getId());
             }
-        } catch(SQLException e){
+        } catch (SQLException e) {
             logger.warn(e.getMessage());
         }
 
@@ -186,21 +186,23 @@ public class UserRepository implements DAO<User>{
     public boolean deleteById(int id) {
         String sql = "delete from users where id = ?";
 
-        try(Connection connection = ConnectionUtility.getConnection()){
+        try (Connection connection = ConnectionUtility.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, id);
 
             int success = stmt.executeUpdate();
             // returns true if success is not 0 and thus the operation was a success
             return success != 0;
-        }catch(SQLException e){
+        } catch (SQLException e) {
             logger.warn(e.getMessage());
         }
         return false;
     }
-}
-  /*  public User getByUsername(String username) {
+
+    @Override
+    public int count() {
+        return 0;
     }
 
-   */
+}
 

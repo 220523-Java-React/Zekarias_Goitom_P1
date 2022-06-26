@@ -18,6 +18,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    public static UserService getInstance() {
+        return null;
+    }
+
     public User createUser(User user){
         return userRepository.create(user);
     }

@@ -2,7 +2,7 @@ package com.revature;
 
 //revature packages//
 import com.revature.controller.CarController;
-import com.revature.controller.OfferController;
+//import com.revature.controller.OfferController;
 import com.revature.controller.UserController;
 
 import com.revature.model.Role;
@@ -22,10 +22,10 @@ it's from here that we will be running the app/web server
 it's where the main method is located
  */
 public class Driver {
+    static Logger logger = LoggerFactory.getLogger(Driver.class);
 
     //the entry point of our class begins at the main method. it's the engine for this whole app
     public static void main(String[] args) {
-        Logger logger = LoggerFactory.getLogger(Driver.class);
 
 
         //creates an instance of the UserController class. This will allow us to access it behaviors and states here in this class
@@ -59,14 +59,21 @@ public class Driver {
         app.post("/users", userController.createNewUser);
         app.put("/users", userController.updateUser);
         app.delete("/users/{id}", userController.deleteUserById);
-
+/*
         //offerController object initialized
         OfferController offerController = new OfferController();
 
         //driver points to OfferController class
         app.get("/offers", offerController.getAllOffers);
-        app.post("/offers", offerController.createOffer);
-      //  app.get("/offers/{open}", offerController.getopenoffers);
+        app.post("/offers", offerController.createNewOffer);
+        app.get("/offers/{id}", offerController.getOfferById);
+        app.get("/offers/{id}", offerController.getAllOpenOffersFromASpecificUserId);
+        app.post("/offers", offerController.denyOffer);
+        app.post("/offers", offerController.approveOffer);
+        app.delete("/offers/{id}", offerController.deleteOfferById);
+        app.put("/offers/{id}", offerController.updateOfferById);
+
+ */
 
 
 

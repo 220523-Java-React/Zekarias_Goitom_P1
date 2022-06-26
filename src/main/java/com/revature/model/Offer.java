@@ -1,20 +1,21 @@
+/*
 package com.revature.model;
-
+import java.io.Serializable;
 import java.util.Objects;
+public class Offer implements Serializable{
 
-public class Offer {
-    private int id;
-    private String open;
-    private String approved;
-    private String rejected;
+    private int id; // The number of the offer
 
+    private int offerPrice; // The price that the customer is offering to purchase the car
+    private Status status;  // Status of the offer
+
+    private User buyer;
+
+    private Car car;
+
+        // No arg constructor
     public Offer() {
-    }
 
-    public Offer(String open, String approved, String rejected) {
-        this.open = open;
-        this.approved = approved;
-        this.rejected = rejected;
     }
 
     public int getId() {
@@ -26,53 +27,64 @@ public class Offer {
         return this;
     }
 
-    public String getOpen() {
-        return open;
+    public int getOfferPrice() {
+        return offerPrice;
     }
 
-    public Offer setOpen(String open) {
-        this.open = open;
+    public Offer setOfferPrice(int offerPrice) {
+        this.offerPrice = offerPrice;
         return this;
     }
 
-    public String getApproved() {
-        return approved;
+    public Status getStatus() {
+        return status;
     }
 
-    public Offer setApproved(String approved) {
-        this.approved = approved;
+    public Offer setStatus(Status status) {
+        this.status = status;
         return this;
     }
 
-    public String getRejected() {
-        return rejected;
+    public User getBuyer() {
+        return buyer;
     }
 
-    public Offer setRejected(String rejected) {
-        this.rejected = rejected;
+    public Offer setBuyer(User buyer) {
+        this.buyer = buyer;
         return this;
     }
+     public Car getCar() {
+        return car;
+    }
+
+    public Offer setCar(Car car) {
+        this.car = car;
+        return this;
+    }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Offer offer = (Offer) o;
-        return id == offer.id && open.equals(offer.open) && approved.equals(offer.approved) && rejected.equals(offer.rejected);
+        return id == offer.id && Objects.equals(offerPrice, offer.offerPrice) && status == offer.status ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, open, approved, rejected);
+        return Objects.hash(id, offerPrice, status, buyer, car);
     }
 
     @Override
     public String toString() {
         return "Offer{" +
                 "id=" + id +
-                ", open='" + open + '\'' +
-                ", approved='" + approved + '\'' +
-                ", rejected='" + rejected + '\'' +
+                ", offerPrice=" + offerPrice +
+                ", status=" + status +
+                ", buyer=" + buyer +
                 '}';
     }
 }
+
+*/

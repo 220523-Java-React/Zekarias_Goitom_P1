@@ -110,4 +110,5 @@ public class User implements Serializable {
                 ", role=" + role +
                 '}';
     }
+
 }
