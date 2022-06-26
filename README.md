@@ -3,4 +3,4 @@ In this project we will build a Web API in the java language (via intellij), lau
 
 Along with that, we will be using Gradle as our automated build dependency and leveraging several implementations including javalin, jackson, log4j, mockito, autho0 and postgresql
 
-List of Technologies used: IntelliJ IDEA, Gradle, Docker, Postman, Java, 
+List of Technologies used: IntelliJ IDEA, Gradle, Docker, Postman, Java, DBeaver, Ubuntu, Postgres
